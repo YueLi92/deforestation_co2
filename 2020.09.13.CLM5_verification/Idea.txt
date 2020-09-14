@@ -1,0 +1,3 @@
+Sep/13/2020, general difference between DEF and CTL average. Next time, to see the time series of Amazonian transpiration/ET/soil moisture change
+
+Sep/xx/2020, perform the transient deforestaion experiments in offline mode

@@ -438,7 +438,7 @@ begin
   res@lbLabelFontHeightF = 0.014*1.3
   res@lbTitlePosition = "Bottom"
   res@lbBoxEndCapStyle = "TriangleBothEnds"
-  res@lbLabelBarOn = False
+  ;res@lbLabelBarOn = False
 
   return (res) 
 end
@@ -600,19 +600,20 @@ scenarios2="S2"
 ens_name = "ens10"
 
 ; -------------------------------------------------------------------draw the plot
-graphname = "figure1_def_m_ctl_InterestVar"
-wks_type          = "pdf"
-wks_type@wkWidth  = 1450          ; Make X11 window larger. Default
-wks_type@wkHeight = 900
-wks = gsn_open_wks(wks_type,graphname);
-varname = (/"EFLX_LH_TOT","FCEV","FCTR","FGEV","FSA","FSA","FSDS","FSR","FSH_TO_COUPLER","Q2M","QFLX_EVAP_TOT","QOVER","QSOIL","QVEGE","QVEGT","RH2M","TOTVEGC","CPOOL","TSA"/)
+
+varname = (/"EFLX_LH_TOT","FCEV","FCTR","FGEV","FSA","FSDS","FSR","FSH_TO_COUPLER","Q2M","QFLX_EVAP_TOT","QOVER","QSOIL","QVEGE","QVEGT","RH2M","TOTVEGC","CPOOL","TSA"/)
 varname2 = (/"total latent heat flux","canopy evaporation","canopy transpiration","ground evaporation","absorbed solar radiation","incident solar radiation","reflected solar radiation","sensible heat flux to coupler","2m specific humidity","qflx_evap_soi,can,tran","surface runoff","ground evaporation","canopy evaporation","canopy transpiration","2m relative humidity","total vegetation carbon, excluding cpool","temporary photosynthate C pool","2m air temperature"/)
 units = (/"W/m^2","W/m^2","W/m^2","W/m^2","W/m^2","W/m^2","W/m^2","W/m^2","kg/kg","mm H2O/s","mm/s","mm/s","mm/s","mm/s","%","gC/m^2","gC/m^2","K"/)
 monthname = (/"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"/)
-nsize = 19 ; 19 
+nsize = 18 ; 19 
 
 i = 0
 do while(i .le. nsize-1)
+  graphname = "def_minus_ctl_v"+(i+1)+"_"+varname2(i)
+  wks_type          = "pdf"
+  wks_type@wkWidth  = 1450          ; Make X11 window larger. Default
+  wks_type@wkHeight = 900
+  wks = gsn_open_wks(wks_type,graphname);
   mmap = new(12,graphic)
   basefilename1="/glade/scratch/liyue1/archive/ctl/lnd/hist/ctl.clm2.h0."
   basefilename2="/glade/scratch/liyue1/archive/def/lnd/hist/def.clm2.h0." 
@@ -721,12 +722,12 @@ do while(i .le. nsize-1)
   pres@gsnPanelLabelBar = True
   pres@lbTitlePosition = "Bottom"	; put it below the plot
   pres@lbTitleString = units(i) ; give the labelbar a title
-  pres@lbTitleFontHeightF = 0.014
-  pres@pmLabelBarOrthogonalPosF = -0.07	; move the labelbar down a bit
+  pres@lbTitleFontHeightF = 0.01
+  ;pres@pmLabelBarOrthogonalPosF = -0.07	; move the labelbar down a bit
   pres@lbPerimOn         = False
   pres@lbBoxLinesOn = False
-  pres@gsnPanelMainString = varname2(i)+" "+varname(i)+" (DEF-CTL)"
-  gsn_panel(wks,mmap,(/6,2/),pres)
+  ;pres@gsnPanelMainString = varname2(i)+" "+varname(i)+" (DEF-CTL)"
+  gsn_panel(wks,mmap,(/6,2/),False)
   i = i+1
 end do
 
